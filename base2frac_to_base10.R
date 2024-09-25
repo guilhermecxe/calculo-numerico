@@ -1,6 +1,6 @@
 # Binário fracionário para decimal fracionário
 
-binary <- c(0, 0, 1, 0, 1) # apenas parte fracionária
+binary <- c(0, 1, 0, 1, 1) # apenas parte fracionária
 decimal <- 0
 
 for(i in 1:length(binary)){
