@@ -41,7 +41,7 @@ if(FALSE){
   print(b)
 }
 
-if(TRUE){
+if(FALSE){
   n = 5
   A = matrix(0, nrow=n, ncol=n)
   A[1,] = c(2, -3,  4,  5, -6)
@@ -57,7 +57,21 @@ if(TRUE){
   print(U)
 }
 
-
+if(FALSE){
+  n = 3
+  A = matrix(0, nrow=n, ncol=n)
+  A[1,] = c(3, 2,  4)
+  A[2,] = c(1, 1,  2)
+  A[3,] = c(4, 3, -2)
+  b = c(1, 2, 3)
+  LUb = fatoracao_lu(A, b, n)
+  L = LUb[[1]]
+  U = LUb[[2]]
+  b = LUb[[3]]
+  print(L)
+  print(U)
+  print(b)
+}
 
 
 
