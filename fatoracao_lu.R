@@ -8,14 +8,24 @@ fatoracao_lu = function(A, b, n){
       m = A[i, j] / A[j, j]
       M[i, j] = -m
     }
+    #cat("M[", j-1, "]:\n")
+    #print(M)
     Ms[[length(Ms)+1]] = M # adicionando M à lista de matrizes
     A = M %*% A
     b = M %*% b
+    #cat("A[", j, "]:\n") # A[0] é A
+    #print(A)
   }
+  #cat("\nMs[[1]]:\n")
+  #print(Ms[[1]])
   
-  L = solve(Ms[[1]]) # solve calcula a inversa
+  #L = solve(Ms[[1]]) # solve calcula a inversa
+  #for (i in 2:length(Ms))
+  #  L = L %*% solve(Ms[[i]])
+  
+  L = eliminacao_de_gauss_inversa(Ms[[1]], n)
   for (i in 2:length(Ms))
-    L = L %*% solve(Ms[[i]])
+    L = L %*% eliminacao_de_gauss_inversa(Ms[[i]], n)
   
   U = A
 
@@ -73,7 +83,28 @@ if(FALSE){
   print(b)
 }
 
-
+if(TRUE){
+  n = 4
+  A = matrix(0, nrow=n, ncol=n)
+  A[1,] = c(2, -1, -1,  2)
+  A[2,] = c(1,  2, -1,  1)
+  A[3,] = c(2,  1,  1,  2)
+  A[4,] = c(1,  3, -1, -1)
+  b = c(6.2, -5.5, 2.2, -14.7)
+  cat('\014')
+  LUb = fatoracao_lu(A, b, n)
+  L = LUb[[1]]
+  U = LUb[[2]]
+  #b = LUb[[3]] # não uso este b, apenas o original
+  print(L)
+  print(U)
+  cat("b:", b, "\n")
+  
+  y = sistema_triangular_inferior(L, b, n)
+  cat("y:", y, "\n")
+  x = sistema_triangular_superior(U, y, n)
+  cat("x:", x, "\n")
+}
 
 
 

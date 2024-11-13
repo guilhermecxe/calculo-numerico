@@ -32,22 +32,42 @@ cholesky_g = function(A, b, n){
   return(G)
 }
 
-n = 3
+if(FALSE){
+  n = 3
+  A = matrix(0, nrow=3, ncol=3)
+  A[1,] = c(1, 2,  2)
+  A[2,] = c(2, 5,  1)
+  A[3,] = c(2, 1, 14)
+  b = c(-3, -1, -23)
 
-A = matrix(0, nrow=3, ncol=3)
-A[1,] = c(1, 2,  2)
-A[2,] = c(2, 5,  1)
-A[3,] = c(2, 1, 14)
+  G = cholesky_g(A, b, n)
+  G_t = t(G)
+  G %*% G_t # == A
+  y = sistema_triangular_inferior(G, b, n)
+  x = sistema_triangular_superior(G_t, y, n) ## Resposta
+  cat("\nx:", x, "\n")
+}
 
-b = c(-3, -1, -23)
-
-G = cholesky_g(A, b, n)
-
-G_t = t(G)
-
-G %*% G_t # == A
-
-y = sistema_triangular_inferior(G, b, n)
-
-x = sistema_triangular_superior(G_t, y, n) ## Resposta
-
+if(TRUE){
+  n = 3
+  A = matrix(0, nrow=3, ncol=3)
+  A[1,] = c( 1,  2, -1)
+  A[2,] = c( 2,  5, -3)
+  A[3,] = c(-1, -3,  6)
+  b = c(-5, -13.4, 16)
+  
+  G = cholesky_g(A, b, n)
+  cat("\nG:\n")
+  print(G)
+  
+  G_t = t(G)
+  cat("\nG^t:\n")
+  print(G_t)
+  
+  G %*% G_t # == A
+  
+  y = sistema_triangular_inferior(G, b, n)
+  cat("y:", y, "\n")
+  x = sistema_triangular_superior(G_t, y, n) ## Resposta
+  cat("x:", x, "\n")
+}
